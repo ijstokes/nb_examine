@@ -139,7 +139,7 @@ def delay_in_thread(callable):
     return delayed_callable
 
 def load_javascript_support(verbose=False):
-    js_context.load_if_not_loaded(["proxy.js"])
+    context.load_if_not_loaded(["proxy.js"])
 
 HTML_EMBEDDING_TEMPLATE = u"""
 <div id="{div_id}"></div>
