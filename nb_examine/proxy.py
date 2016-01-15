@@ -8,10 +8,10 @@ For example to create a jqueryui dialog we don't need any javascript support
 because jqueryui is already loaded as part of Jupyter and the proxy widget
 supplies access to the needed methods from Python:
 
-     from jp_gene_viz import js_proxy
+     from nb_examine import proxy
      from IPython.display import display
-     js_proxy.load_javascript_support()
-     dialog = js_proxy.ProxyWidget()
+     proxy.load_javascript_support()
+     dialog = proxy.ProxyWidget()
      command = dialog.element().html("Hello from jqueryui").dialog()
      display(dialog)
      dialog.send(command)
@@ -108,12 +108,14 @@ PASSED TO PYTHON: None
 """
 
 import time
+import json
+import threading
+
 from IPython.display import display, HTML
 import ipywidgets as widgets
 import traitlets
-from jp_gene_viz import js_context
-import json
-import threading
+
+from nb_examine import context
 
 
 # In the IPython context get_ipython is a builtin.
@@ -137,7 +139,7 @@ def delay_in_thread(callable):
     return delayed_callable
 
 def load_javascript_support(verbose=False):
-    js_context.load_if_not_loaded(["js_proxy.js"])
+    js_context.load_if_not_loaded(["proxy.js"])
 
 HTML_EMBEDDING_TEMPLATE = u"""
 <div id="{div_id}"></div>

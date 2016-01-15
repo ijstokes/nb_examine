@@ -2,15 +2,16 @@
 Widget implementation to examine a value in Jupiter/IPython notebook.
 """
 
-# XXX The current implementation leaks memory on the JS side
+# FIXME The current implementation leaks memory on the JS side
 # by not cleaning up the DISPLAYS mapping when objects are no
 # longer in use.
 
-from jp_gene_viz import js_proxy
-from IPython.display import display
-#import types
 import collections
 import cgi
+
+from nb_examine import proxy
+from IPython.display import display
+#import types
 
 arrow_right = u"\u25b6 &nbsp;"
 arrow_down = u"\u25bc &nbsp;"
@@ -27,7 +28,7 @@ class ObjectDisplay(object):
 
     def __init__(self, target):
         self.target = target
-        w = self.widget = js_proxy.ProxyWidget()
+        w = self.widget = proxy.ProxyWidget()
         e = self.element = w.element()
         # Create JS/python parallel mapping for finding elements.
         self.displays = {}
@@ -189,7 +190,7 @@ class ObjectDisplay(object):
         self.add_child_span(parent_id, new_span)
 
     def show(self):
-        js_proxy.load_javascript_support()
+        proxy.load_javascript_support()
         #self.widget.flush()
         display(self.widget)
 

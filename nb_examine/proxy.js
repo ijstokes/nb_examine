@@ -1,6 +1,6 @@
 
-// This is the javascript side to match js_proxy.py.
-// See js_proxy.py for an explanation of the command transfer
+// This is the javascript side to match proxy.py.
+// See proxy.py for an explanation of the command transfer
 // protocol.
 
 require(["widgets/js/widget", "widgets/js/manager", "underscore", "jquery"
